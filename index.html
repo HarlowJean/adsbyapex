@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ads by Apex — We Run Your Ads. You Run Your Business.</title>
+<style>
+  :root {
+    --navy: #0A1628;
+    --blue: #2563EB;
+    --blue-light: #3b82f6;
+    --slate: #94a3b8;
+    --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--navy); color: var(--white); line-height: 1.6; }
+  
+  /* NAV */
+  nav { position: fixed; top: 0; width: 100%; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(10,22,40,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.08); z-index: 100; }
+  .logo { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a { color: var(--slate); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta { background: var(--blue); color: var(--white) !important; padding: 8px 20px; border-radius: 6px; font-weight: 600; }
+  .nav-cta:hover { background: var(--blue-light) !important; }
+
+  /* HERO */
+  .hero { padding: 140px 40px 100px; max-width: 900px; margin: 0 auto; text-align: center; }
+  .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(37,99,235,0.15); border: 1px solid rgba(37,99,235,0.3); color: #60a5fa; padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 24px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 24px; letter-spacing: -2px; }
+  .hero h1 .accent { color: var(--blue); }
+  .hero p { font-size: 1.2rem; color: var(--slate); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary { background: var(--blue); color: var(--white); padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: all 0.2s; display: inline-block; }
+  .btn-primary:hover { background: var(--blue-light); transform: translateY(-1px); }
+  .btn-secondary { background: rgba(255,255,255,0.05); color: var(--white); padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1rem; border: 1px solid rgba(255,255,255,0.15); transition: all 0.2s; display: inline-block; }
+  .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+  .trust-bar { margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; }
+  .trust-item { display: flex; align-items: center; gap: 10px; color: var(--slate); font-size: 0.9rem; }
+  .trust-icon { width: 20px; height: 20px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; flex-shrink: 0; }
+
+  /* PROBLEM */
+  .problem { padding: 80px 40px; background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .problem-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+  .problem h2 { font-size: 2rem; font-weight: 800; margin-bottom: 24px; }
+  .problem p { color: var(--slate); font-size: 1.05rem; margin-bottom: 16px; }
+  .pain-list { list-style: none; margin: 32px 0; text-align: left; display: inline-block; }
+  .pain-list li { padding: 8px 0; padding-left: 28px; position: relative; color: var(--slate); }
+  .pain-list li::before { content: "✕"; position: absolute; left: 0; color: #ef4444; font-weight: 700; }
+
+  /* SERVICES */
+  .services { padding: 100px 40px; }
+  .section-inner { max-width: 1000px; margin: 0 auto; }
+  .section-label { color: var(--blue); font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+  .section-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -1px; }
+  .section-sub { color: var(--slate); font-size: 1.05rem; margin-bottom: 60px; max-width: 500px; }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .service-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 28px; transition: border-color 0.2s; }
+  .service-card:hover { border-color: rgba(37,99,235,0.4); }
+  .service-icon { font-size: 1.5rem; margin-bottom: 16px; }
+  .service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+  .service-card p { color: var(--slate); font-size: 0.9rem; line-height: 1.6; }
+
+  /* HOW IT WORKS */
+  .how { padding: 100px 40px; background: rgba(255,255,255,0.02); }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; margin-top: 60px; }
+  .step { padding: 32px 24px; position: relative; text-align: center; }
+  .step:not(:last-child)::after { content: "→"; position: absolute; right: -10px; top: 40px; color: var(--blue); font-size: 1.5rem; }
+  .step-num { width: 48px; height: 48px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 800; margin: 0 auto 16px; }
+  .step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+  .step p { color: var(--slate); font-size: 0.85rem; }
+
+  /* PRICING */
+  .pricing { padding: 100px 40px; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 60px; }
+  .price-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 36px; }
+  .price-card.featured { border-color: var(--blue); background: rgba(37,99,235,0.08); position: relative; }
+  .featured-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--blue); color: white; padding: 4px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; white-space: nowrap; }
+  .price-tier { font-size: 0.85rem; color: var(--slate); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  .price-amount { font-size: 3rem; font-weight: 900; letter-spacing: -2px; }
+  .price-period { font-size: 1rem; color: var(--slate); font-weight: 400; }
+  .price-features { list-style: none; margin: 28px 0; }
+  .price-features li { padding: 8px 0; font-size: 0.9rem; display: flex; align-items: center; gap: 10px; }
+  .price-features li::before { content: "✓"; color: var(--blue); font-weight: 700; flex-shrink: 0; }
+  .price-note { color: var(--slate); font-size: 0.8rem; margin-top: 12px; }
+
+  /* GUARANTEE */
+  .guarantee { padding: 80px 40px; }
+  .guarantee-box { max-width: 700px; margin: 0 auto; background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.25); border-radius: 16px; padding: 48px; text-align: center; }
+  .guarantee-box h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 16px; }
+  .guarantee-box p { color: var(--slate); font-size: 1.05rem; line-height: 1.7; }
+
+  /* CONTACT */
+  .contact { padding: 100px 40px; background: rgba(255,255,255,0.02); }
+  .contact-inner { max-width: 600px; margin: 0 auto; }
+  .form { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 40px; margin-top: 40px; }
+  .form-group { margin-bottom: 20px; }
+  .form-group label { display: block; font-size: 0.85rem; color: var(--slate); margin-bottom: 8px; font-weight: 500; }
+  .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--white); font-size: 0.95rem; font-family: inherit; transition: border-color 0.2s; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--blue); }
+  .form-group textarea { height: 80px; resize: none; }
+  .form-group select option { background: var(--navy); }
+  .form-submit { width: 100%; padding: 14px; background: var(--blue); color: var(--white); border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background 0.2s; font-family: inherit; }
+  .form-submit:hover { background: var(--blue-light); }
+
+  /* FOOTER */
+  footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.08); }
+  footer p { color: var(--slate); font-size: 0.85rem; }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 120px 20px 80px; }
+    .hero h1 { letter-spacing: -1px; }
+    .services, .how, .pricing, .guarantee, .contact { padding: 60px 20px; }
+    .step::after { display: none; }
+    .trust-bar { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Ads by Apex</div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#how">Process</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact" class="nav-cta">Free Audit</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">⚡ Facebook & Instagram Ads</div>
+  <h1>We Run Your Ads.<br><span class="accent">You Run Your Business.</span></h1>
+  <p>Full-service Facebook and Instagram ad management — strategy, execution, and daily optimization handled for you.</p>
+  <div class="hero-ctas">
+    <a href="#contact" class="btn-primary">Get a Free Audit →</a>
+    <a href="#pricing" class="btn-secondary">See Pricing</a>
+  </div>
+  <div class="trust-bar">
+    <div class="trust-item"><div class="trust-icon">✓</div> Daily campaign optimization</div>
+    <div class="trust-item"><div class="trust-icon">✓</div> No long-term contracts</div>
+    <div class="trust-item"><div class="trust-icon">✓</div> 60-day results guarantee</div>
+    <div class="trust-item"><div class="trust-icon">✓</div> Facebook & Instagram specialists</div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="problem-inner">
+    <h2>Running Ads Is a Full-Time Job.<br>You Already Have One.</h2>
+    <p>Most business owners try Facebook ads, get mediocre results, and give up — not because ads don't work, but because:</p>
+    <ul class="pain-list">
+      <li>Targeting needs constant adjustment as the algorithm changes</li>
+      <li>Ad creative goes stale — the same ad loses 70% of its impact after 3 weeks</li>
+      <li>Most agencies check your campaigns once a month, not every day</li>
+      <li>Without proper pixel setup, you're flying blind on what's actually working</li>
+    </ul>
+    <p>We fix all of this. Daily.</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <div class="section-label">What We Do</div>
+    <div class="section-title">Everything You Need to Win</div>
+    <div class="section-sub">We handle every piece of your paid social — so you can focus on running your business.</div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🎯</div>
+        <h3>Strategy & Research</h3>
+        <p>We research your market, competitors, and audience before spending a dollar. No guessing — every campaign starts with a data-backed plan.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">✍️</div>
+        <h3>Ad Copy & Creative</h3>
+        <p>We write ad copy built around your specific offer — not generic templates. Copy that stops the scroll and drives action.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">👥</div>
+        <h3>Audience Targeting</h3>
+        <p>Interest stacking, lookalikes from your best customers, behavioral targeting. We find the people most likely to buy — and put your ad in front of them.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <h3>Daily Optimization</h3>
+        <p>We're in your account every single day. Not weekly. Not monthly. When something stops working at 2pm Tuesday, we know by 3pm and we've already made changes.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📊</div>
+        <h3>Transparent Reporting</h3>
+        <p>Clear weekly reports showing exactly what's working, what we changed, and what's coming next. No jargon — just the numbers that matter.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔧</div>
+        <h3>Pixel & Tracking Setup</h3>
+        <p>We install and configure your Facebook Pixel correctly — so every ad dollar is tracked to real results. Most businesses have this set up wrong.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="section-inner">
+    <div class="section-label">The Process</div>
+    <div class="section-title">Up and Running in 7 Days</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Free Audit</h3>
+        <p>We review your current situation and identify the fastest path to results.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Strategy & Build</h3>
+        <p>We build your campaign structure, write your ads, and set up targeting.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Launch</h3>
+        <p>Campaigns go live. We monitor performance daily from day one.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Optimize & Scale</h3>
+        <p>We cut what's not working and scale what is. Continuously.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-inner">
+    <div class="section-label">Investment</div>
+    <div class="section-title">Simple, Transparent Pricing</div>
+    <div class="section-sub">No hidden fees. Ad spend goes directly to Facebook — we never touch your budget.</div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier">Starter</div>
+        <div><span class="price-amount">$1,500</span><span class="price-period">/mo</span></div>
+        <ul class="price-features">
+          <li>Up to 2 active campaigns</li>
+          <li>3 ad creatives/month</li>
+          <li>Audience research & setup</li>
+          <li>Weekly performance reports</li>
+          <li>Monthly strategy call</li>
+          <li>Daily monitoring</li>
+        </ul>
+        <a href="#contact" class="btn-secondary" style="display:block;text-align:center;margin-top:24px">Get Started</a>
+      </div>
+      <div class="price-card featured">
+        <div class="featured-badge">⭐ Most Popular</div>
+        <div class="price-tier">Growth</div>
+        <div><span class="price-amount">$2,500</span><span class="price-period">/mo</span></div>
+        <ul class="price-features">
+          <li>Up to 5 active campaigns</li>
+          <li>8 ad creatives + A/B testing</li>
+          <li>Full funnel strategy</li>
+          <li>Bi-weekly strategy calls</li>
+          <li>Daily optimization</li>
+          <li>Competitor ad analysis</li>
+          <li>Lookalike audience creation</li>
+        </ul>
+        <a href="#contact" class="btn-primary" style="display:block;text-align:center;margin-top:24px">Get Started</a>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">Scale</div>
+        <div><span class="price-amount">$4,500</span><span class="price-period">/mo</span></div>
+        <ul class="price-features">
+          <li>Unlimited campaigns</li>
+          <li>15+ ad creatives/month</li>
+          <li>Advanced segmentation</li>
+          <li>Weekly strategy sessions</li>
+          <li>4-hour response time</li>
+          <li>Quarterly account audit</li>
+          <li>Dynamic product ads</li>
+        </ul>
+        <a href="#contact" class="btn-secondary" style="display:block;text-align:center;margin-top:24px">Get Started</a>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--slate);margin-top:24px;font-size:0.85rem">One-time $500 setup fee on all plans. Ad spend paid directly to Facebook.</p>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section class="guarantee">
+  <div class="guarantee-box">
+    <div style="font-size:2.5rem;margin-bottom:16px">🛡️</div>
+    <h2>Our 60-Day Guarantee</h2>
+    <p>If we don't improve your cost per result within the first 60 days, we work for free until we do. We can make this guarantee because we optimize every single day — not once a month like most agencies. You have nothing to lose.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div style="text-align:center;">
+      <div class="section-label">Get Started</div>
+      <div class="section-title">Get Your Free Ad Audit</div>
+      <p style="color:var(--slate)">We'll review your current situation and show you exactly what we'd do — no obligation, no pitch.</p>
+    </div>
+    <div class="form">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="John Smith">
+      </div>
+      <div class="form-group">
+        <label>Business Name</label>
+        <input type="text" placeholder="Your Business">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="john@yourbusiness.com">
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="tel" placeholder="+1 (555) 000-0000">
+      </div>
+      <div class="form-group">
+        <label>Monthly Ad Budget</label>
+        <select>
+          <option>Under $1,000/month</option>
+          <option>$1,000 - $3,000/month</option>
+          <option>$3,000 - $8,000/month</option>
+          <option>$8,000+/month</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Biggest Challenge with Ads</label>
+        <textarea placeholder="Tell us what's not working..."></textarea>
+      </div>
+      <button class="form-submit">Request Free Audit →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Ads by Apex · All rights reserved · hello@adsbyapex.com</p>
+</footer>
+
+</body>
+</html>
